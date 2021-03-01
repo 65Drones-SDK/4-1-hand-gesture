@@ -64,20 +64,20 @@ let drone_online = false
 let response = ""
 initialize()
 basic.forever(function () {
-    if (input.buttonIsPressed(Button.B)) {
-        yaw = 0
-        throttle = Math.constrain(input.rotation(Rotation.Pitch), -100, 100)
-    } else {
-        if (input.buttonIsPressed(Button.A)) {
-            throttle = 0
-            yaw = Math.constrain(input.rotation(Rotation.Roll), -100, 100)
-        } else {
-            throttle = 0
-            roll = Math.constrain(input.rotation(Rotation.Roll), -100, 100)
-            pitch = Math.constrain(input.rotation(Rotation.Pitch), -100, 100)
-        }
-    }
     if (flying) {
+        if (input.buttonIsPressed(Button.B)) {
+            yaw = 0
+            throttle = 0
+        } else {
+            if (input.buttonIsPressed(Button.A)) {
+                throttle = 0
+                yaw = 0
+            } else {
+                throttle = 0
+                roll = 0
+                pitch = 0
+            }
+        }
         rc(roll, pitch, throttle, yaw)
     }
     basic.pause(500)
